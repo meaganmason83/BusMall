@@ -2,6 +2,10 @@
 
 var allProducts = [];
 
+var myEvent1 = document.getElementById('left');
+var myEvent2 = document.getElementById('middle');
+var myEvent3 = document.getElementById('right');
+
 var imgName = [
   'R2D2 Suitcase',
   'Banana Cutter',
@@ -79,9 +83,13 @@ function renderRightImg() {
   middleImg.src = allProducts[number].imgPath;
 }
 
-renderLeftImg();
-renderMiddleImg();
-renderRightImg();
+function allImages() {
+  renderLeftImg();
+  renderMiddleImg();
+  renderRightImg();
+}
+
+allImages();
 
 // tracker = {
 //   // There will be several properties that we need to define.
@@ -92,5 +100,6 @@ renderRightImg();
 //   ],
 //
 // };
-
-// 'target'.addEventListener('click', 'named function here')
+myEvent1.addEventListener('click', allImages);
+myEvent2.addEventListener('click', allImages);
+myEvent3.addEventListener('click', allImages);
