@@ -44,7 +44,31 @@ function Product(name, imgPath, votes) {
   allProducts.push(this);
 }
 
+new Product('R2D2 Suitcase', 'img/bag.jpg', 0);
+new Product('Banana Cutter', 'img/banana.jpg', 0);
+new Product('iPad Toilet Paper Assistant', 'img/bathroom.jpg', 0);
+new Product('Useless Rainboots', 'img/boots.jpg', 0);
+new Product('All-In-One Breakfast Station', 'img/breakfast.jpg', 0);
+new Product('Italian Meatgum', 'img/bubblegum.jpg', 0);
+new Product('Worlds Most Comfy Chair', 'img/chair.jpg', 0);
+new Product('Green Monster', 'img/cthulhu.jpg', 0);
+new Product('No Quack Muzzle', 'img/dog-duck.jpg', 0);
+new Product('Dragon Dinner', 'img/dragon.jpg', 0);
+new Product('Writing Utensils', 'img/pen.jpg', 0);
+new Product('Doggie Broom', 'img/pet-sweep.jpg', 0);
+new Product('Cut of Pizza', 'img/scissors.jpg', 0);
+new Product('Shark Sleeping Bag', 'img/shark.jpg', 0);
+new Product('Baby Broom', 'img/sweep.jpg', 0);
+new Product('Tauntaun and Baby', 'img/tauntaun.jpg', 0);
+new Product('Unicorn Dinner', 'img/unicorn.jpg', 0);
+new Product('Lizard USB', 'img/usb.jpg', 0);
+new Product('Self-Watering Can', 'img/water-can.jpg', 0);
+new Product('Wide Mouth Wine', 'img/wine-glass.jpg', 0);
+
 // Function that iterates over imagePaths to build product objects
+// Product.prototype.createNewProduct = function() {
+//   //code something
+// };
 
 tracker = {
   // There will be several properties that we need to define.
