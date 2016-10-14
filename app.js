@@ -2,6 +2,10 @@
 
 var allProducts = [];
 
+var clicks = document.getElementById('img container');
+
+var clickTotal = []; //add a function
+
 var myEvent1 = document.getElementById('left');
 var myEvent2 = document.getElementById('middle');
 var myEvent3 = document.getElementById('right');
@@ -53,9 +57,10 @@ var imgPath = [
 ];
 
 var Product = function(imgName, imgPath) {
-  this.name = imgName;
+  this.imgName = imgName;
   this.imgPath = imgPath;
   this.votes = 0;
+  this.displayed = 0;
   allProducts.push(this);
 };
 
@@ -70,17 +75,20 @@ function renderLeftImg() {
   var number = Math.floor(Math.random() * allProducts.length);
   var leftImg = document.getElementById('left');
   leftImg.src = allProducts[number].imgPath;
+  leftImg.alt = allProducts[number].imgName;
 }
 function renderMiddleImg() {
   var number = Math.floor(Math.random() * allProducts.length);
-  var rightImg = document.getElementById('right');
-  rightImg.src = allProducts[number].imgPath;
+  var middleImg = document.getElementById('middle');
+  middleImg.src = allProducts[number].imgPath;
+  middleImg.alt = allProducts[number].imgName;
 }
 
 function renderRightImg() {
   var number = Math.floor(Math.random() * allProducts.length);
-  var middleImg = document.getElementById('middle');
-  middleImg.src = allProducts[number].imgPath;
+  var rightImg = document.getElementById('right');
+  rightImg.src = allProducts[number].imgPath;
+  rightImg.alt = allProducts[number].imgName;
 }
 
 function allImages() {
@@ -91,6 +99,22 @@ function allImages() {
 
 allImages();
 
+function handleImgClick(event) {
+  event.preventDefault;
+  var imgClick = event.target.id;
+  var imgAlt = event.target.alt;
+  if (imgClick === 'img container') {
+    alert('Please click on an image to vote!');
+  }
+  for (var i = 0; 0 < allProducts.length; i++) {
+    if(imgAlt === allProducts[i].imgName) {
+      allProducts[i].votes += 1;
+      allImages();
+    }
+  }
+}
+
+
 // tracker = {
 //   // There will be several properties that we need to define.
 //   imageEls: [
@@ -100,6 +124,4 @@ allImages();
 //   ],
 //
 // };
-myEvent1.addEventListener('click', allImages);
-myEvent2.addEventListener('click', allImages);
-myEvent3.addEventListener('click', allImages);
+clicks.addEventListener('click', handleImgClick);
