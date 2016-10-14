@@ -40,7 +40,7 @@ var imgPath = [
   'img/pet-sweep.jpg',
   'img/scissors.jpg',
   'img/shark.jpg',
-  'img/sweep.jpg',
+  'img/sweep.png',
   'img/tauntaun.jpg',
   'img/unicorn.jpg',
   'img/usb.gif',
