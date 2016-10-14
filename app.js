@@ -69,7 +69,7 @@ createNewProduct();
 
 function renderImage() {
   var leftImg = document.getElementById('left');
-  leftImg.src = allProducts.imgPath;
+  leftImg.src = allProducts[0].imgPath;
 }
 
 renderImage();
