@@ -2,6 +2,8 @@
 
 var allProducts = [];
 
+var randomProducts = [];
+
 var imgName = [
   'R2D2 Suitcase',
   'Banana Cutter',
@@ -62,17 +64,32 @@ function createNewProduct() {
 };
 createNewProduct();
 
-// Function that iterates over imagePaths to build product objects
-// Product.prototype.createNewProduct = function() {
-//   //code something
-// };
+// function createRandomProduct() {
+//   return Math.floor(Math.random() * 20) + 0;
+//
+// }
+// createRandomProduct();
 
-function renderImage() {
+function renderLeftImg() {
+  var number = Math.floor(Math.random() * allProducts.length);
   var leftImg = document.getElementById('left');
-  leftImg.src = allProducts[0].imgPath;
+  leftImg.src = allProducts[number].imgPath;
+}
+function renderMiddleImg() {
+  var number = Math.floor(Math.random() * allProducts.length);
+  var rightImg = document.getElementById('right');
+  rightImg.src = allProducts[number].imgPath;
 }
 
-renderImage();
+function renderRightImg() {
+  var number = Math.floor(Math.random() * allProducts.length);
+  var middleImg = document.getElementById('middle');
+  middleImg.src = allProducts[number].imgPath;
+}
+
+renderLeftImg();
+renderMiddleImg();
+renderRightImg();
 
 // tracker = {
 //   // There will be several properties that we need to define.
