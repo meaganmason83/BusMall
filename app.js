@@ -2,8 +2,6 @@
 
 var allProducts = [];
 
-var randomProducts = [];
-
 var imgName = [
   'R2D2 Suitcase',
   'Banana Cutter',
@@ -63,12 +61,6 @@ function createNewProduct() {
   }
 };
 createNewProduct();
-
-// function createRandomProduct() {
-//   return Math.floor(Math.random() * 20) + 0;
-//
-// }
-// createRandomProduct();
 
 function renderLeftImg() {
   var number = Math.floor(Math.random() * allProducts.length);
