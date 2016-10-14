@@ -1,0 +1,30 @@
+body {
+  background-color: #FFFFF9;
+}
+
+.left {
+float:left;
+border-style: solid;
+}
+
+.middle {
+float:center;
+border-style: outset;
+}
+
+.right {
+float:right;
+border-style: outset;
+}
+
+div {
+  margin-left: 130px;
+  margin-right: 20px;
+}
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
