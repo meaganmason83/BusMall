@@ -10,12 +10,38 @@
   // 6. Button to show up after 15 clicks
   // 7. Reset button
   // 8. Error handling for event click (Optional... be nice.)
+'use strict';
 
 var allProducts = [];
-var imagePaths = ['bag.jpg', 'banana.jpg', 'bathroom.jpg']; // Finish populating this
 
-function Product(source) {
-  // Add your properties here
+var imgPath = [
+  'img/bag.jpg',
+  'img/banana.jpg',
+  'img/bathroom.jpg',
+  'img/boots.jpg',
+  'img/breakfast.jpg',
+  'img/bubblegum.jpg',
+  'img/chair.jpg',
+  'img/cthulhu.jpg',
+  'img/dog-duck.jpg',
+  'img/dragon.jpg',
+  'img/pen.jpg',
+  'img/pet-sweep.jpg',
+  'img/scissors.jpg',
+  'img/shark.jpg',
+  'img/sweep.jpg',
+  'img/tauntaun.jpg',
+  'img/unicorn.jpg',
+  'img/usb.jpg',
+  'img/water-can.jpg',
+  'img/wine-glass.jpg'
+];
+
+function Product(name, imgPath, votes) {
+  this.name = name;
+  this.imgPath = imgPath;
+  this.votes = votes;
+  allProducts.push(this);
 }
 
 // Function that iterates over imagePaths to build product objects
