@@ -5,9 +5,7 @@ var allProducts = [];
 var clicks = document.getElementById('img container');
 clicks.addEventListener('click', handleImgClick);
 
-var clickTotal = []; //add a function
-
-var shuffleNumbers = [];
+var clickTotal = [];
 
 var imgName = [
   'R2D2 Suitcase',
@@ -70,44 +68,47 @@ function createNewProduct() {
 };
 createNewProduct();
 
-function renderLeftImg() {
-  for (var i = 0; i < 3; i++) {
-    var number = Math.floor(Math.random() * allProducts.length);
-    var leftImg = document.getElementById('left');
-    leftImg.src = allProducts[number].imgPath;
-    leftImg.alt = allProducts[number].imgName;
+function renderImg() {
+  var noDupeArray = [];
+  var pic1 = Math.floor(Math.random() * allProducts.length);
+  var leftImg = document.getElementById('left');
+  leftImg.src = allProducts[pic1].imgPath;
+  leftImg.alt = allProducts[pic1].imgName;
+
+  var pic2 = Math.floor(Math.random() * allProducts.length);
+  var middleImg = document.getElementById('middle');
+  middleImg.src = allProducts[pic2].imgPath;
+  middleImg.alt = allProducts[pic2].imgName;
+
+  var pic3 = Math.floor(Math.random() * allProducts.length);
+  var rightImg = document.getElementById('right');
+  rightImg.src = allProducts[pic3].imgPath;
+  rightImg.alt = allProducts[pic3].imgName;
+
+  var picLeft = Math.floor(Math.random() * allProducts.length);
+  while (picLeft === noDupeArray[0, 1, 2]) {
+    picLeft = Math.floor(Math.random() * allProducts.length);
   }
-}
+  leftImg.src = allProducts[picLeft].imgPath;
 
-function renderMiddleImg() {
-  for (var i = 0; i < 3; i++) {
-    var number = Math.floor(Math.random() * allProducts.length);
-    var middleImg = document.getElementById('middle');
-    middleImg.src = allProducts[number].imgPath;
-    middleImg.alt = allProducts[number].imgName;
+  var picMiddle = Math.floor(Math.random() * allProducts.length);
+  while (picMiddle === noDupeArray[0, 1, 2] || picMiddle === picLeft) {
+    picMiddle = Math.floor(Math.random() * allProducts.length);
   }
-}
+  middleImg.src = allProducts[picMiddle].imgPath;
 
-function renderRightImg() {
-  for (var i = 0; i < 3; i++) {
-    var number = Math.floor(Math.random() * allProducts.length);
-    var rightImg = document.getElementById('right');
-    rightImg.src = allProducts[number].imgPath;
-    rightImg.alt = allProducts[number].imgName;
+  var picRight = Math.floor(Math.random() * allProducts.length);
+  while (picRight === noDupeArray[0, 1, 2] || picRight === picMiddle || picRight === picLeft) {
+    picRight = Math.floor(Math.random() * allProducts.length);
   }
-  // while(shuffleNumbers.indexOf(shufflenumer) > -1) {
-  //   var shufflenumer = Math.floor(Math.random() * max);
-  // }
-  // shuffleNumbers.push(number);
+  rightImg.src = allProducts[picRight].imgPath;
+
+  noDupeArray.push(picLeft);
+  noDupeArray.push(picMiddle);
+  noDupeArray.push(picRight);
 }
 
-function allImages() {
-  renderLeftImg();
-  renderMiddleImg();
-  renderRightImg();
-}
-
-allImages();
+renderImg();
 
 function handleImgClick(event) {
   event.preventDefault;
@@ -120,17 +121,8 @@ function handleImgClick(event) {
       if(imgAlt === allProducts[i].imgName) {
         allProducts[i].votes += 1;
         clickTotal++;
-        allImages();
+        renderImg();
       }
     }
   } //else if render table method
 }
-// tracker = {
-//   // There will be several properties that we need to define.
-//   imageEls: [
-//     document.getElementById('test'),
-//     document.getElementById('test2'),
-//     document.getElementById('test3')
-//   ],
-//
-// };
