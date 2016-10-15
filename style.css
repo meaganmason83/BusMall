@@ -1,30 +1,35 @@
 body {
-  background-color: #FFFFF9;
+  background-color: #d1e0e0;
+  font-family: 'Nunito', sans-serif;
 }
 
 .left {
 float:left;
 border-style: solid;
+padding: 3px;
 }
 
 .middle {
 float:center;
 border-style: outset;
+padding: 3px;
 }
 
 .right {
 float:right;
 border-style: outset;
+padding: 3px;
 }
 
 div {
-  margin-left: 130px;
-  margin-right: 20px;
+  margin-left: 157px;
 }
 h1 {
+  margin-top: 80px;
   text-align: center;
 }
 
 h2 {
   text-align: center;
+  margin-bottom: 50px;
 }
