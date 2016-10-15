@@ -3,12 +3,11 @@
 var allProducts = [];
 
 var clicks = document.getElementById('img container');
+clicks.addEventListener('click', handleImgClick);
 
 var clickTotal = []; //add a function
 
-var myEvent1 = document.getElementById('left');
-var myEvent2 = document.getElementById('middle');
-var myEvent3 = document.getElementById('right');
+var shuffleNumbers = [];
 
 var imgName = [
   'R2D2 Suitcase',
@@ -72,23 +71,34 @@ function createNewProduct() {
 createNewProduct();
 
 function renderLeftImg() {
-  var number = Math.floor(Math.random() * allProducts.length);
-  var leftImg = document.getElementById('left');
-  leftImg.src = allProducts[number].imgPath;
-  leftImg.alt = allProducts[number].imgName;
+  for (var i = 0; i < 3; i++) {
+    var number = Math.floor(Math.random() * allProducts.length);
+    var leftImg = document.getElementById('left');
+    leftImg.src = allProducts[number].imgPath;
+    leftImg.alt = allProducts[number].imgName;
+  }
 }
+
 function renderMiddleImg() {
-  var number = Math.floor(Math.random() * allProducts.length);
-  var middleImg = document.getElementById('middle');
-  middleImg.src = allProducts[number].imgPath;
-  middleImg.alt = allProducts[number].imgName;
+  for (var i = 0; i < 3; i++) {
+    var number = Math.floor(Math.random() * allProducts.length);
+    var middleImg = document.getElementById('middle');
+    middleImg.src = allProducts[number].imgPath;
+    middleImg.alt = allProducts[number].imgName;
+  }
 }
 
 function renderRightImg() {
-  var number = Math.floor(Math.random() * allProducts.length);
-  var rightImg = document.getElementById('right');
-  rightImg.src = allProducts[number].imgPath;
-  rightImg.alt = allProducts[number].imgName;
+  for (var i = 0; i < 3; i++) {
+    var number = Math.floor(Math.random() * allProducts.length);
+    var rightImg = document.getElementById('right');
+    rightImg.src = allProducts[number].imgPath;
+    rightImg.alt = allProducts[number].imgName;
+  }
+  // while(shuffleNumbers.indexOf(shufflenumer) > -1) {
+  //   var shufflenumer = Math.floor(Math.random() * max);
+  // }
+  // shuffleNumbers.push(number);
 }
 
 function allImages() {
@@ -105,16 +115,16 @@ function handleImgClick(event) {
   var imgAlt = event.target.alt;
   if (imgClick === 'img container') {
     alert('Please click on an image to vote!');
-  }
-  for (var i = 0; 0 < allProducts.length; i++) {
-    if(imgAlt === allProducts[i].imgName) {
-      allProducts[i].votes += 1;
-      allImages();
+  } else if (imgClick && clickTotal < 15) {
+    for (var i = 0; 0 < allProducts.length; i++) {
+      if(imgAlt === allProducts[i].imgName) {
+        allProducts[i].votes += 1;
+        clickTotal++;
+        allImages();
+      }
     }
-  }
+  } //else if render table method
 }
-
-
 // tracker = {
 //   // There will be several properties that we need to define.
 //   imageEls: [
@@ -124,4 +134,3 @@ function handleImgClick(event) {
 //   ],
 //
 // };
-clicks.addEventListener('click', handleImgClick);
