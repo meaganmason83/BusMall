@@ -3,7 +3,8 @@
 var allProducts = [];
 
 var clicks = document.getElementById('img container');
-clicks.addEventListener('click', handleImgClick);
+
+var results = document.getElementById('edit');
 
 var clickTotal = [];
 
@@ -57,7 +58,7 @@ var Product = function(imgName, imgPath) {
   this.imgName = imgName;
   this.imgPath = imgPath;
   this.votes = 0;
-  this.displayed = 0;
+  this.displayed = 0; //need to incorporate this into results list
   allProducts.push(this);
 };
 
@@ -133,6 +134,7 @@ function handleImgClick(event) {
     }
   }
 }
+clicks.addEventListener('click', handleImgClick);
 
 function resultsRender(){
   var ulEl = document.createElement('ul');
@@ -146,3 +148,4 @@ function resultsRender(){
     ulEl.appendChild(liEl);
   }
 }
+results.addEventListener('click', resultsRender);
