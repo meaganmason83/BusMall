@@ -134,7 +134,6 @@ function handleImgClick(event) {
     }
   }
 }
-clicks.addEventListener('click', handleImgClick);
 
 function resultsRender(){
   var ulEl = document.createElement('ul');
@@ -147,5 +146,11 @@ function resultsRender(){
     liEl.textContent = 'You voted for ' + allProducts[i].imgName + ' a total of ' + allProducts[i].votes + ' times.';
     ulEl.appendChild(liEl);
   }
+  var refresh = document.createElement('button');
+  refresh.setAttribute('name', 'refreshPage');
+  refresh.textContent = 'Refresh Page';
+  document.getElementById('buttons').appendChild(refresh);
 }
+
+clicks.addEventListener('click', handleImgClick);
 results.addEventListener('click', resultsRender);
