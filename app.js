@@ -5,8 +5,6 @@ var allProducts = [];
 var clicks = document.getElementById('img container');
 clicks.addEventListener('click', handleImgClick);
 
-var results = document.getElementById('results');
-
 var clickTotal = [];
 
 var imgName = [
@@ -125,12 +123,13 @@ function handleImgClick(event) {
         clickTotal++;
         renderImg();
       }
-      // if (clickTotal === 15) {
-      //   document.getElementById('results').style.visibility = 'visible';
-      //   results.addEventListener('click', resultsClick);
-      // } else {
-      //   document.getElementById('results').style.visibility = 'hidden';
-      // }
+      if (clickTotal === 15) {
+        document.getElementById('edit');
+        edit.style.visibility = 'visible';
+      } else {
+        document.getElementById('edit');
+        edit.style.visibility = 'hidden';
+      }
     }
   } //else if render table method
 }
