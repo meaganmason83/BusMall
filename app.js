@@ -131,5 +131,18 @@ function handleImgClick(event) {
         edit.style.visibility = 'hidden';
       }
     }
-  } //else if render table method
+  }
+}
+
+function resultsRender(){
+  var ulEl = document.createElement('ul');
+  ulEl.setAttribute('id', 'list');
+  document.getElementById('productList').appendChild(ulEl);
+
+  for (var i = 0; i < allProducts.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.setAttribute('class', 'products');
+    liEl.textContent = 'You voted for ' + allProducts[i].imgName + ' a total of ' + allProducts[i].votes + ' times.';
+    ulEl.appendChild(liEl);
+  }
 }
