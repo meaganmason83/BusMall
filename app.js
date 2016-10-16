@@ -6,6 +6,8 @@ var clicks = document.getElementById('img container');
 
 var results = document.getElementById('edit');
 
+var refresh = document.getElementById('refreshPage');
+
 var clickTotal = [];
 
 var imgName = [
@@ -147,9 +149,14 @@ function resultsRender(){
     ulEl.appendChild(liEl);
   }
   var refresh = document.createElement('button');
-  refresh.setAttribute('name', 'refreshPage');
+  refresh.setAttribute('id', 'refreshPage');
   refresh.textContent = 'Refresh Page';
   document.getElementById('buttons').appendChild(refresh);
+  refresh.addEventListener('click', refreshPage);
+}
+
+function refreshPage() {
+  window.location.reload();
 }
 
 clicks.addEventListener('click', handleImgClick);
