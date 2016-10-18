@@ -71,60 +71,49 @@ function createNewProduct() {
 };
 createNewProduct();
 
+function randomIndex() {
+  return Math.floor(Math.random() * allProducts.length);
+}
+
 function renderImg() {
-  var noDupeArray = [];
-  var pic1 = Math.floor(Math.random() * allProducts.length);
+  var index1 = randomIndex();
+  var index2 = randomIndex();
+  var index3 = randomIndex();
+
+  while (index2 === index1) {
+    index2 = randomIndex();
+  }
+
+  while (index3 === index2 || index3 === index1) {
+    index3 = randomIndex();
+  }
+
   var leftImg = document.getElementById('left');
-  leftImg.src = allProducts[pic1].imgPath;
-  leftImg.alt = allProducts[pic1].imgName;
+  leftImg.src = allProducts[index1].imgPath;
+  leftImg.alt = allProducts[index1].imgName;
 
-  var pic2 = Math.floor(Math.random() * allProducts.length);
   var middleImg = document.getElementById('middle');
-  middleImg.src = allProducts[pic2].imgPath;
-  middleImg.alt = allProducts[pic2].imgName;
+  middleImg.src = allProducts[index2].imgPath;
+  middleImg.alt = allProducts[index2].imgName;
 
-  var pic3 = Math.floor(Math.random() * allProducts.length);
   var rightImg = document.getElementById('right');
-  rightImg.src = allProducts[pic3].imgPath;
-  rightImg.alt = allProducts[pic3].imgName;
-
-  var picLeft = Math.floor(Math.random() * allProducts.length);
-  while (picLeft === noDupeArray[0, 1, 2]) {
-    picLeft = Math.floor(Math.random() * allProducts.length);
-  }
-  leftImg.src = allProducts[picLeft].imgPath;
-
-  var picMiddle = Math.floor(Math.random() * allProducts.length);
-  while (picMiddle === noDupeArray[0, 1, 2] || picMiddle === picLeft) {
-    picMiddle = Math.floor(Math.random() * allProducts.length);
-  }
-  middleImg.src = allProducts[picMiddle].imgPath;
-
-  var picRight = Math.floor(Math.random() * allProducts.length);
-  while (picRight === noDupeArray[0, 1, 2] || picRight === picMiddle || picRight === picLeft) {
-    picRight = Math.floor(Math.random() * allProducts.length);
-  }
-  rightImg.src = allProducts[picRight].imgPath;
-
-  noDupeArray.push(picLeft);
-  noDupeArray.push(picMiddle);
-  noDupeArray.push(picRight);
+  rightImg.src = allProducts[index3].imgPath;
+  rightImg.alt = allProducts[index3].imgName;
 }
 
 renderImg();
 
 function handleImgClick(event) {
-  event.preventDefault;
-  var imgClick = event.target.id;
+  var imgId = event.target.id;
   var imgAlt = event.target.alt;
-  if (imgClick === 'img container') {
+
+  if (imgId === 'img container') {
     alert('Please click on an image to vote!');
-  } else if (imgClick && clickTotal < 15) {
-    for (var i = 0; 0 < allProducts.length; i++) {
+  } else if (clickTotal < 15) {
+    for (var i = 0; i < allProducts.length; i++) {
       if(imgAlt === allProducts[i].imgName) {
         allProducts[i].votes += 1;
         clickTotal++;
-        renderImg();
       }
       if (clickTotal === 15) {
         document.getElementById('edit');
@@ -132,6 +121,7 @@ function handleImgClick(event) {
       } else {
         document.getElementById('edit');
         edit.style.visibility = 'hidden';
+        renderImg();
       }
     }
   }
