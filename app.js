@@ -109,13 +109,13 @@ function handleImgClick(event) {
 
   if (imgId === 'img container') {
     alert('Please click on an image to vote!');
-  } else if (clickTotal < 2) {
+  } else if (clickTotal < 15) {
     for (var i = 0; i < allProducts.length; i++) {
       if(imgAlt === allProducts[i].imgName) {
         allProducts[i].votes += 1;
         clickTotal++;
       }
-      if (clickTotal === 2) {
+      if (clickTotal === 15) {
         document.getElementById('edit');
         edit.style.visibility = 'visible';
       } else {
