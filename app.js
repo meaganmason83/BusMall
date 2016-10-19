@@ -202,6 +202,11 @@ function makeChart() {
     },
     options: {
       scales: {
+        xAxes: [{
+          ticks: {
+            fontSize: 8
+          }
+        }]
       }
     }
   });
