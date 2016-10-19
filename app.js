@@ -194,4 +194,4 @@ function refreshPage() {
 }
 
 clicks.addEventListener('click', handleImgClick);
-// results.addEventListener('click', resultsRender);
+results.addEventListener('click', makeChart);
