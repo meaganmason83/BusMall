@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>BusMall</title>
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="style.css" value="">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
 </head>
 <body>
   <header>
@@ -20,7 +21,8 @@
     <section id="buttons">
       <button type="button" value="edit" id="edit">View results now</button>
     </section>
-    <section id="productList">
+    <section id="productChart">
+      <canvas id="canvas"></canvas>
     </section>
   </main>
   <script type="text/javascript" src="app.js"></script>
