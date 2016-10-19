@@ -10,6 +10,10 @@ var refresh = document.getElementById('refreshPage');
 
 var clickTotal = [];
 
+var chartLabels = [];
+
+var chartVotes = [];
+
 var imgName = [
   'R2D2 Suitcase',
   'Banana Cutter',
@@ -127,32 +131,67 @@ function handleImgClick(event) {
   }
 }
 
-//chart functions here!
-//updateChartData - the name/votedata
+
+// updateChartData - the name/votedata
+function updateChart() {
+  for (var i = 0; i < allProducts.length; i++){
+    chartLabels.push(allProducts[i].imgName);
+    chartVotes.push(allProducts[i].votes);
+  }
+}
+
 //makeChart - make the Chart
+function makeChart() {
+  updateChart();
+  var ctx = document.getElementById('myChart');
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: 'BusMall Products',
+        data: chartVotes,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+}
+
 //add event listener to results button
 
-function resultsRender(){
-  var ulEl = document.createElement('ul');
-  ulEl.setAttribute('id', 'list');
-  document.getElementById('productChart').appendChild(ulEl);
-
-  for (var i = 0; i < allProducts.length; i++) {
-    var liEl = document.createElement('li');
-    liEl.setAttribute('class', 'products');
-    liEl.textContent = 'You voted for ' + allProducts[i].imgName + ' a total of ' + allProducts[i].votes + ' times.';
-    ulEl.appendChild(liEl);
-  }
-  var refresh = document.createElement('button');
-  refresh.setAttribute('id', 'refreshPage');
-  refresh.textContent = 'Refresh Page';
-  document.getElementById('buttons').appendChild(refresh);
-  refresh.addEventListener('click', refreshPage);
-}
+// function resultsRender(){
+//   var ulEl = document.createElement('ul');
+//   ulEl.setAttribute('id', 'list');
+//   document.getElementById('productChart').appendChild(ulEl);
+//
+//   for (var i = 0; i < allProducts.length; i++) {
+//     var liEl = document.createElement('li');
+//     liEl.setAttribute('class', 'products');
+//     liEl.textContent = 'You voted for ' + allProducts[i].imgName + ' a total of ' + allProducts[i].votes + ' times.';
+//     ulEl.appendChild(liEl);
+//   }
+//   var refresh = document.createElement('button');
+//   refresh.setAttribute('id', 'refreshPage');
+//   refresh.textContent = 'Refresh Page';
+//   document.getElementById('buttons').appendChild(refresh);
+//   refresh.addEventListener('click', refreshPage);
+// }
 
 function refreshPage() {
   window.location.reload();
 }
 
 clicks.addEventListener('click', handleImgClick);
-results.addEventListener('click', resultsRender);
+// results.addEventListener('click', resultsRender);
