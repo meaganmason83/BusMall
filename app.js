@@ -134,7 +134,7 @@ function handleImgClick(event) {
 
 // updateChartData - the name/votedata
 function updateChart() {
-  for (var i = 0; i < allProducts.length; i++){
+  for (var i = 0; i < allProducts.length; i++) {
     chartLabels.push(allProducts[i].imgName);
     chartVotes.push(allProducts[i].votes);
   }
