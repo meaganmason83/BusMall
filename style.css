@@ -43,12 +43,16 @@ h2 {
 }
 
 #buttons {
-  margin-left: 500px;
+  margin-left: 550px;
 }
 
 #productChart {
-  text-align: left;
-  margin-left: 375px;
+  width: 600px;
+  margin-left: 330px;
+}
+
+#myChart {
+  padding-top: 40px;
 }
 
 #edit {
