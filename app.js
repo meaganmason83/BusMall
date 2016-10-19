@@ -6,7 +6,7 @@ var clicks = document.getElementById('img container');
 
 var results = document.getElementById('edit');
 
-var refresh = document.getElementById('refreshPage');
+//var refresh = document.getElementById('refreshPage');
 
 var clickTotal = [];
 
@@ -150,20 +150,58 @@ function makeChart() {
     data: {
       labels: chartLabels,
       datasets: [{
-        label: 'BusMall Products',
+        label: 'BusMall Product Totals',
+        fillColor: '#382765',
         data: chartVotes,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1
+        backgroundColor: [
+          '#D8BFD8',
+          '#40E0D0',
+          '#66CDAA',
+          '#90EE90',
+          '#F08080',
+          '#DC143C',
+          '#D8BFD8',
+          '#40E0D0',
+          '#66CDAA',
+          '#90EE90',
+          '#F08080',
+          '#DC143C',
+          '#D8BFD8',
+          '#40E0D0',
+          '#66CDAA',
+          '#90EE90',
+          '#F08080',
+          '#DC143C',
+          '#D8BFD8',
+          '#40E0D0'
+        ],
+        borderColor: [
+          '#D8BFD8',
+          '#40E0D0',
+          '#66CDAA',
+          '#90EE90',
+          '#F08080',
+          '#DC143C',
+          '#D8BFD8',
+          '#40E0D0',
+          '#66CDAA',
+          '#90EE90',
+          '#F08080',
+          '#DC143C',
+          '#D8BFD8',
+          '#40E0D0',
+          '#66CDAA',
+          '#90EE90',
+          '#F08080',
+          '#DC143C',
+          '#D8BFD8',
+          '#40E0D0'
+        ],
+        borderWidth: 3
       }]
     },
     options: {
       scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:true
-          }
-        }]
       }
     }
   });
@@ -189,9 +227,9 @@ function makeChart() {
 //   refresh.addEventListener('click', refreshPage);
 // }
 
-function refreshPage() {
-  window.location.reload();
-}
+// function refreshPage() {
+//   window.location.reload();
+// }
 
 clicks.addEventListener('click', handleImgClick);
 results.addEventListener('click', makeChart);
