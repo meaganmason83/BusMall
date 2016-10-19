@@ -127,10 +127,15 @@ function handleImgClick(event) {
   }
 }
 
+//chart functions here!
+//updateChartData - the name/votedata
+//makeChart - make the Chart
+//add event listener to results button
+
 function resultsRender(){
   var ulEl = document.createElement('ul');
   ulEl.setAttribute('id', 'list');
-  document.getElementById('productList').appendChild(ulEl);
+  document.getElementById('productChart').appendChild(ulEl);
 
   for (var i = 0; i < allProducts.length; i++) {
     var liEl = document.createElement('li');
