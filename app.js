@@ -6,13 +6,13 @@ var clicks = document.getElementById('img container');
 
 var results = document.getElementById('edit');
 
-//var refresh = document.getElementById('refreshPage');
+var refresh = document.getElementById('refreshPage');
 
 var clickTotal = [];
 
-var chartLabels = [];
+var chartLabels = []; // to push product names to create chart
 
-var chartVotes = [];
+var chartVotes = []; // to push votes to create chart
 
 var imgName = [
   'R2D2 Suitcase',
@@ -132,7 +132,7 @@ function handleImgClick(event) {
 }
 
 
-// updateChartData - the name/votedata
+// update the name & vote data
 function updateChart() {
   for (var i = 0; i < allProducts.length; i++) {
     chartLabels.push(allProducts[i].imgName);
@@ -140,7 +140,7 @@ function updateChart() {
   }
 }
 
-//makeChart - make the Chart
+// make the Chart
 function makeChart() {
   updateChart();
   var ctx = document.getElementById('myChart');
@@ -205,31 +205,18 @@ function makeChart() {
       }
     }
   });
+  // create refresh button
+  var refresh = document.createElement('button');
+  refresh.setAttribute('id', 'refreshPage');
+  refresh.textContent = 'Refresh Page';
+  document.getElementById('buttons').appendChild(refresh);
+  refresh.addEventListener('click', refreshPage);
 }
 
-//add event listener to results button
-
-// function resultsRender(){
-//   var ulEl = document.createElement('ul');
-//   ulEl.setAttribute('id', 'list');
-//   document.getElementById('productChart').appendChild(ulEl);
-//
-//   for (var i = 0; i < allProducts.length; i++) {
-//     var liEl = document.createElement('li');
-//     liEl.setAttribute('class', 'products');
-//     liEl.textContent = 'You voted for ' + allProducts[i].imgName + ' a total of ' + allProducts[i].votes + ' times.';
-//     ulEl.appendChild(liEl);
-//   }
-//   var refresh = document.createElement('button');
-//   refresh.setAttribute('id', 'refreshPage');
-//   refresh.textContent = 'Refresh Page';
-//   document.getElementById('buttons').appendChild(refresh);
-//   refresh.addEventListener('click', refreshPage);
-// }
-
-// function refreshPage() {
-//   window.location.reload();
-// }
+function refreshPage() {
+  window.location.reload();
+}
 
 clicks.addEventListener('click', handleImgClick);
 results.addEventListener('click', makeChart);
+refresh.addEventListener('click', refreshPage);
