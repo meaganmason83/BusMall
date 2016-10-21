@@ -1,129 +1,205 @@
 'use strict';
 
-var allProducts = [];
 
-var clicks = document.getElementById('img container');
-
-var results = document.getElementById('edit');
-
-var refresh = document.getElementById('refreshPage'); //this variable is used inside the handleImgClick function
-
-var clickTotal = [];
-
-var chartLabels = []; // to push product names to create chart
-
-var chartVotes = []; // to push votes to create chart
-
-
-var imgName = [
-  'R2D2 Suitcase',
-  'Banana Cutter',
-  'iPad Toilet Paper Assistant',
-  'Useless Rainboots',
-  'All-In-One Breakfast Station',
-  'Italian Meatgum',
-  'Worlds Most Comfy Chair',
-  'Green Monster',
-  'No Quack Muzzle',
-  'Dragon Dinner',
-  'Writing Utensils',
-  'Doggie Broom',
-  'Cut of Pizza',
-  'Shark Sleeping Bag',
-  'Baby Broom',
-  'Tauntaun and Baby',
-  'Unicorn Dinner',
-  'Lizard USB',
-  'Self-Watering Can',
-  'Wide Mouth Wine'
-];
-
-var imgPath = [
-  'img/bag.jpg',
-  'img/banana.jpg',
-  'img/bathroom.jpg',
-  'img/boots.jpg',
-  'img/breakfast.jpg',
-  'img/bubblegum.jpg',
-  'img/chair.jpg',
-  'img/cthulhu.jpg',
-  'img/dog-duck.jpg',
-  'img/dragon.jpg',
-  'img/pen.jpg',
-  'img/pet-sweep.jpg',
-  'img/scissors.jpg',
-  'img/shark.jpg',
-  'img/sweep.png',
-  'img/tauntaun.jpg',
-  'img/unicorn.jpg',
-  'img/usb.gif',
-  'img/water-can.jpg',
-  'img/wine-glass.jpg'
-];
-
-var Product = function(imgName, imgPath, votes, displayed) {
+function Product(imgName, imgPath, votes, displayed) {
   this.imgName = imgName;
   this.imgPath = imgPath;
   this.votes = votes || 0; //the or operator is to use zero initially, or the local storage tally
   this.displayed = displayed || 0; //the or operator is to use zero initially, or the local storage tally
-  allProducts.push(this);
-};
-
-function createNewProduct() {
-  for (var i = 0; i < imgPath.length; i++){
-    new Product(imgName[i], imgPath[i]);
-  }
-};
-
-function randomIndex() {
-  return Math.floor(Math.random() * allProducts.length);
+  tracker.allProducts.push(this);
 }
 
-function renderImg() {
-  var index1 = randomIndex();
-  var index2 = randomIndex();
-  var index3 = randomIndex();
+var tracker = {
 
-  while (index2 === index1) {
-    index2 = randomIndex();
-  }
+  allProducts: [],
+  refresh: document.getElementById('refreshPage'),
+  clickTotal: [],
+  chartLabels: [],
+  chartVotes: [],
+  imgName: [
+    'R2D2 Suitcase',
+    'Banana Cutter',
+    'iPad Toilet Paper Assistant',
+    'Useless Rainboots',
+    'All-In-One Breakfast Station',
+    'Italian Meatgum',
+    'Worlds Most Comfy Chair',
+    'Green Monster',
+    'No Quack Muzzle',
+    'Dragon Dinner',
+    'Writing Utensils',
+    'Doggie Broom',
+    'Cut of Pizza',
+    'Shark Sleeping Bag',
+    'Baby Broom',
+    'Tauntaun and Baby',
+    'Unicorn Dinner',
+    'Lizard USB',
+    'Self-Watering Can',
+    'Wide Mouth Wine'
+  ],
+  imgPath: [
+    'img/bag.jpg',
+    'img/banana.jpg',
+    'img/bathroom.jpg',
+    'img/boots.jpg',
+    'img/breakfast.jpg',
+    'img/bubblegum.jpg',
+    'img/chair.jpg',
+    'img/cthulhu.jpg',
+    'img/dog-duck.jpg',
+    'img/dragon.jpg',
+    'img/pen.jpg',
+    'img/pet-sweep.jpg',
+    'img/scissors.jpg',
+    'img/shark.jpg',
+    'img/sweep.png',
+    'img/tauntaun.jpg',
+    'img/unicorn.jpg',
+    'img/usb.gif',
+    'img/water-can.jpg',
+    'img/wine-glass.jpg'
+  ],
 
-  while (index3 === index2 || index3 === index1) {
-    index3 = randomIndex();
-  }
-
-  var leftImg = document.getElementById('left');
-  leftImg.src = allProducts[index1].imgPath;
-  leftImg.alt = allProducts[index1].imgName;
-  leftImg.displayed += 1; //not working
-
-  var middleImg = document.getElementById('middle');
-  middleImg.src = allProducts[index2].imgPath;
-  middleImg.alt = allProducts[index2].imgName;
-  middleImg.displayed += 1; //not working
-
-  var rightImg = document.getElementById('right');
-  rightImg.src = allProducts[index3].imgPath;
-  rightImg.alt = allProducts[index3].imgName;
-  rightImg.displayed += 1; //not working
-}
-
-//localStorage function
-function checkLocalStorage() {
-  if (localStorage.allProducts) {
-    var products = JSON.parse(localStorage.getItem('allProducts'));
-    for (var pro of products) {
-      new Product(pro.imgName, pro.imgPath, pro.votes, pro.displayed);
+  createNewProduct: function() {
+    for (var i = 0; i < tracker.imgPath.length; i++){
+      new Product(tracker.imgName[i], tracker.imgPath[i]);
     }
-    renderImg();
-  } else {
-    createNewProduct();
-    renderImg();
+  },
+
+  randomIndex: function() {
+    return Math.floor(Math.random() * tracker.allProducts.length);
+  },
+
+  renderImg: function() {
+    var index1 = tracker.randomIndex();
+    var index2 = tracker.randomIndex();
+    var index3 = tracker.randomIndex();
+
+    while (index2 === index1) {
+      index2 = tracker.randomIndex();
+    }
+
+    while (index3 === index2 || index3 === index1) {
+      index3 = tracker.randomIndex();
+    }
+
+    var leftImg = document.getElementById('left');
+    leftImg.src = tracker.allProducts[index1].imgPath;
+    leftImg.alt = tracker.allProducts[index1].imgName;
+    leftImg.displayed += 1; //not working
+
+    var middleImg = document.getElementById('middle');
+    middleImg.src = tracker.allProducts[index2].imgPath;
+    middleImg.alt = tracker.allProducts[index2].imgName;
+    middleImg.displayed += 1; //not working
+
+    var rightImg = document.getElementById('right');
+    rightImg.src = tracker.allProducts[index3].imgPath;
+    rightImg.alt = tracker.allProducts[index3].imgName;
+    rightImg.displayed += 1; //not working
+  },
+
+  //localStorage function
+  checkLocalStorage: function() {
+    if (localStorage.allProducts) {
+      var products = JSON.parse(localStorage.getItem('allProducts'));
+      for (var pro of products) {
+        new Product(pro.imgName, pro.imgPath, pro.votes, pro.displayed);
+      }
+      tracker.renderImg();
+    } else {
+      tracker.createNewProduct();
+      tracker.renderImg();
+    }
+  },
+
+  updateChart: function() {
+    for (var i = 0; i < tracker.allProducts.length; i++) {
+      tracker.chartLabels.push(tracker.allProducts[i].imgName);
+      tracker.chartVotes.push(tracker.allProducts[i].votes);
+    }
+  },
+
+  makeChart: function() {
+    tracker.updateChart();
+
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: tracker.chartLabels,
+        datasets: [{
+          label: 'BusMall Product Totals',
+          fillColor: '#382765',
+          data: tracker.chartVotes,
+          backgroundColor: [
+            '#D8BFD8',
+            '#40E0D0',
+            '#66CDAA',
+            '#90EE90',
+            '#F08080',
+            '#DC143C',
+            '#D8BFD8',
+            '#40E0D0',
+            '#66CDAA',
+            '#90EE90',
+            '#F08080',
+            '#DC143C',
+            '#D8BFD8',
+            '#40E0D0',
+            '#66CDAA',
+            '#90EE90',
+            '#F08080',
+            '#DC143C',
+            '#D8BFD8',
+            '#40E0D0'
+          ],
+          borderColor: [
+            '#D8BFD8',
+            '#40E0D0',
+            '#66CDAA',
+            '#90EE90',
+            '#F08080',
+            '#DC143C',
+            '#D8BFD8',
+            '#40E0D0',
+            '#66CDAA',
+            '#90EE90',
+            '#F08080',
+            '#DC143C',
+            '#D8BFD8',
+            '#40E0D0',
+            '#66CDAA',
+            '#90EE90',
+            '#F08080',
+            '#DC143C',
+            '#D8BFD8',
+            '#40E0D0'
+          ],
+          borderWidth: 3
+        }]
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            ticks: {
+              fontSize: 8
+            }
+          }]
+        }
+      }
+    });
+    var refresh = document.createElement('button');
+    refresh.setAttribute('id', 'refreshPage');
+    refresh.textContent = 'Refresh Page';
+    document.getElementById('buttons').appendChild(refresh);
+    refresh.addEventListener('click', tracker.refreshPage);
+  },
+
+  refreshPage: function() {
+    window.location.reload();
   }
-}
-//createNewProduct();
-//renderImg();
-checkLocalStorage();
+};
 
 function handleImgClick(event) {
   var imgId = event.target.id;
@@ -131,111 +207,31 @@ function handleImgClick(event) {
 
   if (imgId === 'img container') {
     alert('Please click on an image to vote!');
-  } else if (clickTotal < 15) {
-    for (var i = 0; i < allProducts.length; i++) {
-      if(imgAlt === allProducts[i].imgName) {
-        allProducts[i].votes += 1;
-        clickTotal++;
+  } else if (tracker.clickTotal < 15) {
+    for (var i = 0; i < tracker.allProducts.length; i++) {
+      if(imgAlt === tracker.allProducts[i].imgName) {
+        tracker.allProducts[i].votes += 1;
+        tracker.clickTotal++;
       }
-      if (clickTotal === 15) {
+      if (tracker.clickTotal === 15) {
         document.getElementById('edit');
         edit.style.visibility = 'visible';
       } else {
         document.getElementById('edit');
         edit.style.visibility = 'hidden';
-        renderImg();
-        localStorage.setItem('allProducts', JSON.stringify(allProducts)); //adding to localStorage
+        tracker.renderImg();
+        localStorage.setItem('allProducts', JSON.stringify(tracker.allProducts)); //adding to localStorage
       }
     }
   }
 }
 
-function updateChart() {
-  for (var i = 0; i < allProducts.length; i++) {
-    chartLabels.push(allProducts[i].imgName);
-    chartVotes.push(allProducts[i].votes);
-  }
-}
+tracker.checkLocalStorage();
 
-function makeChart() {
-  updateChart();
-  var ctx = document.getElementById('myChart');
+var ctx = document.getElementById('myChart');
 
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: chartLabels,
-      datasets: [{
-        label: 'BusMall Product Totals',
-        fillColor: '#382765',
-        data: chartVotes,
-        backgroundColor: [
-          '#D8BFD8',
-          '#40E0D0',
-          '#66CDAA',
-          '#90EE90',
-          '#F08080',
-          '#DC143C',
-          '#D8BFD8',
-          '#40E0D0',
-          '#66CDAA',
-          '#90EE90',
-          '#F08080',
-          '#DC143C',
-          '#D8BFD8',
-          '#40E0D0',
-          '#66CDAA',
-          '#90EE90',
-          '#F08080',
-          '#DC143C',
-          '#D8BFD8',
-          '#40E0D0'
-        ],
-        borderColor: [
-          '#D8BFD8',
-          '#40E0D0',
-          '#66CDAA',
-          '#90EE90',
-          '#F08080',
-          '#DC143C',
-          '#D8BFD8',
-          '#40E0D0',
-          '#66CDAA',
-          '#90EE90',
-          '#F08080',
-          '#DC143C',
-          '#D8BFD8',
-          '#40E0D0',
-          '#66CDAA',
-          '#90EE90',
-          '#F08080',
-          '#DC143C',
-          '#D8BFD8',
-          '#40E0D0'
-        ],
-        borderWidth: 3
-      }]
-    },
-    options: {
-      scales: {
-        xAxes: [{
-          ticks: {
-            fontSize: 8
-          }
-        }]
-      }
-    }
-  });
-  var refresh = document.createElement('button');
-  refresh.setAttribute('id', 'refreshPage');
-  refresh.textContent = 'Refresh Page';
-  document.getElementById('buttons').appendChild(refresh);
-  refresh.addEventListener('click', refreshPage);
-}
-
-function refreshPage() {
-  window.location.reload();
-}
-
+var clicks = document.getElementById('img container');
 clicks.addEventListener('click', handleImgClick);
-results.addEventListener('click', makeChart);
+
+var results = document.getElementById('edit');
+results.addEventListener('click', tracker.makeChart);
