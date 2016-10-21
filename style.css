@@ -3,33 +3,11 @@ body {
   font-family: 'Nunito', sans-serif;
 }
 
-#left {
-float:left;
-border-style: outset;
-padding: 3px;
-width: 20;
-height: 20;
-}
-
-#middle {
-float:center;
-border-style: outset;
-padding: 3px;
-width: 20;
-height: 20;
-}
-
-#right {
-float:right;
-border-style: outset;
-padding: 3px;
-width: 20;
-height: 20;
-}
-
-#img container {
-  margin-left: 155px;
-  margin-right: 165px;
+.pics {
+  align-content: center;
+  border-style: outset;
+  width: inherit;
+  padding: 6px;
 }
 
 h1 {
