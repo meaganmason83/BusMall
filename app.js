@@ -6,13 +6,14 @@ var clicks = document.getElementById('img container');
 
 var results = document.getElementById('edit');
 
-var refresh = document.getElementById('refreshPage');
+var refresh = document.getElementById('refreshPage'); //this variable is used inside the handleImgClick function
 
 var clickTotal = [];
 
 var chartLabels = []; // to push product names to create chart
 
 var chartVotes = []; // to push votes to create chart
+
 
 var imgName = [
   'R2D2 Suitcase',
@@ -60,11 +61,11 @@ var imgPath = [
   'img/wine-glass.jpg'
 ];
 
-var Product = function(imgName, imgPath) {
+var Product = function(imgName, imgPath, votes, displayed) {
   this.imgName = imgName;
   this.imgPath = imgPath;
-  this.votes = 0;
-  this.displayed = 0; //need to incorporate this into results list
+  this.votes = votes || 0; //the or operator is to use zero initially, or the local storage tally
+  this.displayed = displayed || 0; //the or operator is to use zero initially, or the local storage tally
   allProducts.push(this);
 };
 
@@ -73,7 +74,6 @@ function createNewProduct() {
     new Product(imgName[i], imgPath[i]);
   }
 };
-createNewProduct();
 
 function randomIndex() {
   return Math.floor(Math.random() * allProducts.length);
@@ -95,17 +95,35 @@ function renderImg() {
   var leftImg = document.getElementById('left');
   leftImg.src = allProducts[index1].imgPath;
   leftImg.alt = allProducts[index1].imgName;
+  leftImg.displayed += 1; //adding
 
   var middleImg = document.getElementById('middle');
   middleImg.src = allProducts[index2].imgPath;
   middleImg.alt = allProducts[index2].imgName;
+  middleImg.displayed += 1; //adding
 
   var rightImg = document.getElementById('right');
   rightImg.src = allProducts[index3].imgPath;
   rightImg.alt = allProducts[index3].imgName;
+  rightImg.displayed += 1; //adding
 }
 
+//localStorage function
+function checkLocalStorage() {
+  if (localStorage.allProducts) {
+    var products = JSON.parse(localStorage.getItem('allProducts'));
+    for (var i = 0; i < allProducts.length; i++) { //somethings not working in this for loop
+      new Product(products.imgName, products.imgPath, products.votes, products.displayed);
+    }
+    renderImg();
+  } else {
+    createNewProduct();
+    renderImg();
+  }
+}
+createNewProduct();
 renderImg();
+//checkLocalStorage();
 
 function handleImgClick(event) {
   var imgId = event.target.id;
@@ -126,13 +144,12 @@ function handleImgClick(event) {
         document.getElementById('edit');
         edit.style.visibility = 'hidden';
         renderImg();
+        localStorage.setItem('allProducts', JSON.stringify(allProducts)); //adding to localStorage
       }
     }
   }
 }
 
-
-// update the name & vote data
 function updateChart() {
   for (var i = 0; i < allProducts.length; i++) {
     chartLabels.push(allProducts[i].imgName);
@@ -140,7 +157,6 @@ function updateChart() {
   }
 }
 
-// make the Chart
 function makeChart() {
   updateChart();
   var ctx = document.getElementById('myChart');
@@ -210,7 +226,6 @@ function makeChart() {
       }
     }
   });
-  // create refresh button
   var refresh = document.createElement('button');
   refresh.setAttribute('id', 'refreshPage');
   refresh.textContent = 'Refresh Page';
@@ -224,4 +239,3 @@ function refreshPage() {
 
 clicks.addEventListener('click', handleImgClick);
 results.addEventListener('click', makeChart);
-refresh.addEventListener('click', refreshPage);
