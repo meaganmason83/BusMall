@@ -95,25 +95,25 @@ function renderImg() {
   var leftImg = document.getElementById('left');
   leftImg.src = allProducts[index1].imgPath;
   leftImg.alt = allProducts[index1].imgName;
-  leftImg.displayed += 1; //adding
+  leftImg.displayed += 1; //not working
 
   var middleImg = document.getElementById('middle');
   middleImg.src = allProducts[index2].imgPath;
   middleImg.alt = allProducts[index2].imgName;
-  middleImg.displayed += 1; //adding
+  middleImg.displayed += 1; //not working
 
   var rightImg = document.getElementById('right');
   rightImg.src = allProducts[index3].imgPath;
   rightImg.alt = allProducts[index3].imgName;
-  rightImg.displayed += 1; //adding
+  rightImg.displayed += 1; //not working
 }
 
 //localStorage function
 function checkLocalStorage() {
   if (localStorage.allProducts) {
     var products = JSON.parse(localStorage.getItem('allProducts'));
-    for (var i = 0; i < allProducts.length; i++) { //somethings not working in this for loop
-      new Product(products.imgName, products.imgPath, products.votes, products.displayed);
+    for (var pro of products) {
+      new Product(pro.imgName, pro.imgPath, pro.votes, pro.displayed);
     }
     renderImg();
   } else {
@@ -121,9 +121,9 @@ function checkLocalStorage() {
     renderImg();
   }
 }
-createNewProduct();
-renderImg();
-//checkLocalStorage();
+//createNewProduct();
+//renderImg();
+checkLocalStorage();
 
 function handleImgClick(event) {
   var imgId = event.target.id;
