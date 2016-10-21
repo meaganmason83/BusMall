@@ -201,6 +201,7 @@ var tracker = {
   }
 };
 
+//try to move this into tracker!
 function handleImgClick(event) {
   var imgId = event.target.id;
   var imgAlt = event.target.alt;
