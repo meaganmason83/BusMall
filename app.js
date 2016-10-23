@@ -1,11 +1,14 @@
 'use strict';
 
+var ctx = document.getElementById('myChart');
+var clicks = document.getElementById('img container');
+var results = document.getElementById('edit');
 
 function Product(imgName, imgPath, votes, displayed) {
   this.imgName = imgName;
   this.imgPath = imgPath;
-  this.votes = votes || 0; //the or operator is to use zero initially, or the local storage tally
-  this.displayed = displayed || 0; //the or operator is to use zero initially, or the local storage tally
+  this.votes = votes || 0;
+  this.displayed = displayed || 0;
   tracker.allProducts.push(this);
 }
 
@@ -87,20 +90,21 @@ var tracker = {
     var leftImg = document.getElementById('left');
     leftImg.src = tracker.allProducts[index1].imgPath;
     leftImg.alt = tracker.allProducts[index1].imgName;
-    leftImg.displayed += 1; //not working
 
     var middleImg = document.getElementById('middle');
     middleImg.src = tracker.allProducts[index2].imgPath;
     middleImg.alt = tracker.allProducts[index2].imgName;
-    middleImg.displayed += 1; //not working
 
     var rightImg = document.getElementById('right');
     rightImg.src = tracker.allProducts[index3].imgPath;
     rightImg.alt = tracker.allProducts[index3].imgName;
-    rightImg.displayed += 1; //not working
+
+    //this is not adding correctly
+    tracker.allProducts[index1].displayed += 1;
+    tracker.allProducts[index2].displayed += 1;
+    tracker.allProducts[index3].displayed += 1;
   },
 
-  //localStorage function
   checkLocalStorage: function() {
     if (localStorage.allProducts) {
       var products = JSON.parse(localStorage.getItem('allProducts'));
@@ -198,41 +202,34 @@ var tracker = {
 
   refreshPage: function() {
     window.location.reload();
-  }
-};
+  },
 
-//try to move this into tracker!
-function handleImgClick(event) {
-  var imgId = event.target.id;
-  var imgAlt = event.target.alt;
+  handleImgClick: function(event) {
+    var imgId = event.target.id;
+    var imgAlt = event.target.alt;
 
-  if (imgId === 'img container') {
-    alert('Please click on an image to vote!');
-  } else if (tracker.clickTotal < 15) {
-    for (var i = 0; i < tracker.allProducts.length; i++) {
-      if(imgAlt === tracker.allProducts[i].imgName) {
-        tracker.allProducts[i].votes += 1;
-        tracker.clickTotal++;
-      }
-      if (tracker.clickTotal === 15) {
-        document.getElementById('edit');
-        edit.style.visibility = 'visible';
-      } else {
-        document.getElementById('edit');
-        edit.style.visibility = 'hidden';
-        tracker.renderImg();
-        localStorage.setItem('allProducts', JSON.stringify(tracker.allProducts)); //adding to localStorage
+    if (imgId === 'img container') {
+      alert('Please click on an image to vote!');
+    } else if (tracker.clickTotal < 15) {
+      for (var i = 0; i < tracker.allProducts.length; i++) {
+        if(imgAlt === tracker.allProducts[i].imgName) {
+          tracker.allProducts[i].votes += 1;
+          tracker.clickTotal++;
+        }
+        if (tracker.clickTotal === 15) {
+          document.getElementById('edit');
+          edit.style.visibility = 'visible';
+        } else {
+          document.getElementById('edit');
+          edit.style.visibility = 'hidden';
+          tracker.renderImg();
+          localStorage.setItem('allProducts', JSON.stringify(tracker.allProducts));
+        }
       }
     }
   }
-}
+};
 
 tracker.checkLocalStorage();
-
-var ctx = document.getElementById('myChart');
-
-var clicks = document.getElementById('img container');
-clicks.addEventListener('click', handleImgClick);
-
-var results = document.getElementById('edit');
+clicks.addEventListener('click', tracker.handleImgClick);
 results.addEventListener('click', tracker.makeChart);
