@@ -4,11 +4,10 @@ var ctx = document.getElementById('myChart');
 var clicks = document.getElementById('img container');
 var results = document.getElementById('edit');
 
-function Product(imgName, imgPath, votes, displayed) {
+function Product(imgName, imgPath, votes) {
   this.imgName = imgName;
   this.imgPath = imgPath;
   this.votes = votes || 0;
-  this.displayed = displayed || 0;
   tracker.allProducts.push(this);
 }
 
@@ -98,18 +97,13 @@ var tracker = {
     var rightImg = document.getElementById('right');
     rightImg.src = tracker.allProducts[index3].imgPath;
     rightImg.alt = tracker.allProducts[index3].imgName;
-
-    //this is not adding correctly
-    tracker.allProducts[index1].displayed += 1;
-    tracker.allProducts[index2].displayed += 1;
-    tracker.allProducts[index3].displayed += 1;
   },
 
   checkLocalStorage: function() {
     if (localStorage.allProducts) {
       var products = JSON.parse(localStorage.getItem('allProducts'));
       for (var pro of products) {
-        new Product(pro.imgName, pro.imgPath, pro.votes, pro.displayed);
+        new Product(pro.imgName, pro.imgPath, pro.votes);
       }
       tracker.renderImg();
     } else {
@@ -133,7 +127,7 @@ var tracker = {
       data: {
         labels: tracker.chartLabels,
         datasets: [{
-          label: 'BusMall Product Totals',
+          label: 'Vote Totals',
           fillColor: '#382765',
           data: tracker.chartVotes,
           backgroundColor: [
@@ -193,6 +187,7 @@ var tracker = {
         }
       }
     });
+
     var refresh = document.createElement('button');
     refresh.setAttribute('id', 'refreshPage');
     refresh.textContent = 'Refresh Page';
